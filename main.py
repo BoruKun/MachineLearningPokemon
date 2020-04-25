@@ -4,12 +4,15 @@ https://www.kaggle.com/rounakbanik/pokemon
 Постройте классификатор, отвечающий на вопрос 'является ли покемон легендарным?'.
 
 Наберите команду из N покемонов, максимизирующую причиняемый урон.
+
+Евгений Раскин, 192 группа
 """
 
 import pandas
 
 from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import GaussianNB
+from sklearn.metrics import accuracy_score
 
 
 def main():
@@ -17,7 +20,7 @@ def main():
     data = pandas.read_csv("pokemon.csv")
 
     # Organize our data
-    X = data.drop(columns = ["is_legendary"])
+    X = data.drop(columns=["is_legendary"])
     y = data["is_legendary"]
 
     # Split our data to test and train samples
@@ -37,6 +40,9 @@ def main():
     # Predict
     predictions = gnb.predict(X_test[integer_values])
     print(predictions)
+
+    # Evaluate accuracy
+    print(accuracy_score(y_test, predictions))
 
 
 if __name__ == "__main__":
